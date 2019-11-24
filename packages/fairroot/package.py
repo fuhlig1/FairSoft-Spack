@@ -68,7 +68,7 @@ class Fairroot(CMakePackage):
 
     depends_on('geant4@10.04.p01 cxxstd=11 ~qt~vecgeom~opengl~x11~motif+threads~data~clhep', when="@18.0.6")
 
-    depends_on('root@6.12.06 cxxstd=11 +fortran+gdml+http+memstat+pythia6+pythia8+vc+xrootd+python~vdt', when="@18.0.6")
+    depends_on('root@6.12.06 cxxstd=11 +fortran+gdml+http+memstat+pythia6+pythia8+vc+xrootd+python~vdt~davix', when="@18.0.6")
 
     depends_on('geant3@v2-5-gcc8', when="@18.0.6")
     depends_on('vgm@4-4', when="@18.0.6")
@@ -84,8 +84,10 @@ class Fairroot(CMakePackage):
     patch('CMake.patch', level=0, when="@18.0.6")
 
     def setup_environment(self, spack_env, run_env):
-        stdversion=('-std=c++%s' % self.spack.cxxstd)
-        spack_env.append_flags('CXXFLAGS', '-std=c++%s' % self.spack.cxxstd)
+#        stdversion=('-std=c++%s' % self.spack.cxxstd)
+#        spack_env.append_flags('CXXFLAGS', '-std=c++11' % self.spack.cxxstd)
+        stdversion=('-std=c++11')
+        spack_env.append_flags('CXXFLAGS', '-std=c++11')
 
     def cmake_args(self):
         spec = self.spec
